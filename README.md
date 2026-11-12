@@ -7,6 +7,8 @@
 - **入场动画**：进入页面后模型自动从地面开始分层组装（底座→路面→建筑→店内→街具→电线→雨，约 11s）
 - **雨夜氛围**：动态雨丝、地面溅落涟漪、积水霓虹倒影、招牌微闪、暖冷光对比
 
+**线上预览（GitHub Pages）**：https://ada20204.github.io/rainy-konbini-diorama/
+
 ## 运行
 
 ```bash
@@ -38,6 +40,19 @@ tailscale serve status                                # 3. 查看入口，形如
 4. **serve = tailnet 内网**，只有登录在同一 tailnet 的设备能访问；要公开到互联网需另用 `tailscale funnel`（谨慎）。
 5. **代理干扰**：本机 shell 的 `http(s)_proxy` 会劫持 tailnet 域名的请求，curl 自测时加 `--noproxy '*'`；浏览器若挂系统代理同理。
 6. **区分挂载点**：同域名下可能同时挂了多个项目，确认地址栏路径正确（黑屏先看是不是开错挂载点）。
+
+## 部署（GitHub Pages，公开访问）
+
+推送到 `main` 即自动构建发布（`.github/workflows/deploy-pages.yml`）：
+
+1. 仓库 Settings → Pages → Source 选 **GitHub Actions**（已配置）
+2. 每次 push `main`：`npm ci` → `npm run build` → 发布 `dist/` 到 Pages
+3. 站点地址：`https://<用户名>.github.io/<仓库名>/`
+
+**特殊说明：**
+- 免费版账号的 Pages **要求仓库公开**（Pages 站点本身永远是公网可访问的；私有仓库开 Pages 需 Pro/Team）
+- 项目页部署在子路径下，靠 `vite.config.js` 的 `base: './'`（相对路径）正确加载资源，与 tailscale serve 子路径部署同一个技巧
+- 发布有约 1~2 分钟延迟；首次部署后若 404，检查 Actions 运行日志与 Pages 设置
 
 ## 场景内容
 
