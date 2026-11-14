@@ -73,7 +73,18 @@ function animate() {
 animate();
 
 // 调试 / 测试句柄（无 UI）
-window.__diorama = { scene, camera, assembly, THREE, get elapsed() { return elapsed; }, total };
+window.__diorama = {
+  scene,
+  camera,
+  controls,
+  renderer,
+  assembly,
+  THREE,
+  get elapsed() {
+    return elapsed;
+  },
+  total,
+};
 
 window.addEventListener('resize', () => {
   camera.aspect = window.innerWidth / window.innerHeight;

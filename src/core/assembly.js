@@ -79,19 +79,15 @@ export class AssemblyController {
       p.obj.position.set(
         p.pos.x + p.offset.x * (1 - ep),
         p.pos.y + p.offset.y * (1 - ep),
-        p.pos.z + p.offset.z * (1 - ep),
+        p.pos.z + p.offset.z * (1 - ep)
       );
       p.obj.scale.set(
         p.scale.x * Math.max(0.001, es),
         p.scale.y * Math.max(0.001, es),
-        p.scale.z * Math.max(0.001, es),
+        p.scale.z * Math.max(0.001, es)
       );
       const qTilt = new THREE.Quaternion().setFromEuler(
-        new THREE.Euler(
-          p.tilt.x * (1 - ep),
-          p.tilt.y * (1 - ep),
-          p.tilt.z * (1 - ep),
-        ),
+        new THREE.Euler(p.tilt.x * (1 - ep), p.tilt.y * (1 - ep), p.tilt.z * (1 - ep))
       );
       p.obj.quaternion.copy(p.quat).multiply(qTilt);
     }

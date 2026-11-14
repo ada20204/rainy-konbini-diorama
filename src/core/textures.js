@@ -137,8 +137,12 @@ export function asphaltTexture() {
   // 潮湿水痕
   for (let i = 0; i < 14; i++) {
     const g = ctx.createRadialGradient(
-      (i * 137) % 512, (i * 211) % 512, 4,
-      (i * 137) % 512, (i * 211) % 512, 60 + (i % 4) * 26,
+      (i * 137) % 512,
+      (i * 211) % 512,
+      4,
+      (i * 137) % 512,
+      (i * 211) % 512,
+      60 + (i % 4) * 26
     );
     g.addColorStop(0, 'rgba(10,14,28,0.35)');
     g.addColorStop(1, 'rgba(10,14,28,0)');
@@ -232,7 +236,16 @@ export function vendingTexture() {
   ctx.textBaseline = 'middle';
   ctx.fillText('つめた〜い', 256, 62);
   // 饮料陈列（5 x 4 亮格）
-  const colors = ['#60a5fa', '#f472b6', '#fbbf24', '#34d399', '#a78bfa', '#fb923c', '#22d3ee', '#f87171'];
+  const colors = [
+    '#60a5fa',
+    '#f472b6',
+    '#fbbf24',
+    '#34d399',
+    '#a78bfa',
+    '#fb923c',
+    '#22d3ee',
+    '#f87171',
+  ];
   for (let r = 0; r < 4; r++) {
     for (let col = 0; col < 5; col++) {
       const x = 30 + col * 94;
@@ -274,7 +287,16 @@ export function fridgeTexture() {
   g.addColorStop(1, '#c7dcf5');
   ctx.fillStyle = g;
   ctx.fillRect(0, 0, 512, 512);
-  const colors = ['#60a5fa', '#f472b6', '#fbbf24', '#34d399', '#a78bfa', '#fb923c', '#22d3ee', '#f87171'];
+  const colors = [
+    '#60a5fa',
+    '#f472b6',
+    '#fbbf24',
+    '#34d399',
+    '#a78bfa',
+    '#fb923c',
+    '#22d3ee',
+    '#f87171',
+  ];
   for (let shelf = 0; shelf < 3; shelf++) {
     const y = 40 + shelf * 160;
     for (let i = 0; i < 8; i++) {
@@ -322,7 +344,10 @@ export function wetTexture() {
   ctx.fillStyle = '#141c30';
   ctx.fillRect(0, 0, 512, 512);
   const streaks = [
-    ['#8fb8e8', 0.34], ['#f0c98a', 0.3], ['#93d8e8', 0.28], ['#e8a8c8', 0.18],
+    ['#8fb8e8', 0.34],
+    ['#f0c98a', 0.3],
+    ['#93d8e8', 0.28],
+    ['#e8a8c8', 0.18],
   ];
   for (let i = 0; i < 7; i++) {
     const [color, alpha] = streaks[i % streaks.length];

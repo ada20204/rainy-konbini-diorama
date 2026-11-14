@@ -28,8 +28,7 @@ export function buildWorld(scene, reg) {
       splashes.update(dt, t > world.rainStart ? 1 : 0);
       for (const f of flickers) {
         const k =
-          1 +
-          f.amount * Math.sin(t * f.speed) * (0.55 + 0.45 * Math.sin(t * f.speed * 0.37 + 1.7));
+          1 + f.amount * Math.sin(t * f.speed) * (0.55 + 0.45 * Math.sin(t * f.speed * 0.37 + 1.7));
         f.mat.color.setScalar(k);
       }
     },

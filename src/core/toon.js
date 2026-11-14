@@ -43,7 +43,7 @@ function smoothGeometry(geo) {
   if (!g) {
     try {
       g = mergeVertices(geo.clone(), 1e-4);
-    } catch (e) {
+    } catch {
       g = geo.clone();
     }
     g.computeVertexNormals();
@@ -66,13 +66,13 @@ export function addOutline(mesh, thickness = 0.03, color = OUTLINE_COLOR) {
       i,
       p.getX(i) + nor.getX(i) * thickness,
       p.getY(i) + nor.getY(i) * thickness,
-      p.getZ(i) + nor.getZ(i) * thickness,
+      p.getZ(i) + nor.getZ(i) * thickness
     );
   }
   p.needsUpdate = true;
   const outline = new THREE.Mesh(
     expanded,
-    new THREE.MeshBasicMaterial({ color, side: THREE.BackSide }),
+    new THREE.MeshBasicMaterial({ color, side: THREE.BackSide })
   );
   outline.castShadow = false;
   outline.receiveShadow = false;

@@ -27,7 +27,9 @@ export function buildBase(scene, reg) {
   reg(pedestal, layer.base);
 
   const groundSlab = new THREE.Group();
-  groundSlab.add(box(22, 0.1, 22, toonMat(0x1d2334, { map: wallTexture('#1d2334') }), { y: -0.11 }));
+  groundSlab.add(
+    box(22, 0.1, 22, toonMat(0x1d2334, { map: wallTexture('#1d2334') }), { y: -0.11 })
+  );
   scene.add(groundSlab);
   reg(groundSlab, layer.base);
 
@@ -74,8 +76,12 @@ export function buildBase(scene, reg) {
   gutters.add(box(22, 0.012, 0.38, gutterMat, { x: 0, y: 0.022, z: 9.55 }));
   // 格栅
   for (const [x, z, w, d] of [
-    [4.05, 1.4, 0.32, 1.1], [4.05, -4.6, 0.32, 1.1], [-1.4, 4.05, 1.1, 0.32],
-    [6.8, 4.05, 1.1, 0.32], [9.55, 5.6, 0.32, 1.1], [9.55, -2.4, 0.32, 1.1],
+    [4.05, 1.4, 0.32, 1.1],
+    [4.05, -4.6, 0.32, 1.1],
+    [-1.4, 4.05, 1.1, 0.32],
+    [6.8, 4.05, 1.1, 0.32],
+    [9.55, 5.6, 0.32, 1.1],
+    [9.55, -2.4, 0.32, 1.1],
   ]) {
     gutters.add(box(w, 0.02, d, grateMat, { x, y: 0.028, z }));
   }
@@ -130,7 +136,10 @@ export function buildBase(scene, reg) {
   /* ---------- 井盖 ---------- */
   const manhole = new THREE.Group();
   const mh = cyl(0.52, 0.52, 0.024, toonMat(0xffffff, { map: manholeTexture() }), {
-    x: 6.2, y: 0.034, z: 7.6, seg: 28,
+    x: 6.2,
+    y: 0.034,
+    z: 7.6,
+    seg: 28,
   });
   manhole.add(mh);
   scene.add(manhole);
@@ -176,7 +185,7 @@ export function buildBase(scene, reg) {
         opacity,
         blending: THREE.AdditiveBlending,
         depthWrite: false,
-      }),
+      })
     );
     m.rotation.x = -Math.PI / 2;
     m.position.set(x, y, z);

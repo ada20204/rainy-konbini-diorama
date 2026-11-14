@@ -24,12 +24,12 @@ export const L = {
 
   // 装配动画分层（数字越小越先出现）
   layer: {
-    base: 0,     // 底座、地面
-    ground: 1,   // 马路、人行道
-    marks: 2,    // 标线、排水沟、积水
+    base: 0, // 底座、地面
+    ground: 1, // 马路、人行道
+    marks: 2, // 标线、排水沟、积水
     building: 3, // 建筑外壳
     interior: 4, // 店内陈设
-    prop: 5,     // 街具
-    wire: 6,     // 电线杆、电线、雨
+    prop: 5, // 街具
+    wire: 6, // 电线杆、电线、雨
   },
 };

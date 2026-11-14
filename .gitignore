@@ -1,4 +1,10 @@
 node_modules/
 dist/
+coverage/
 shots/
+.verify-*/
 *.log
+.DS_Store
+.env
+.env.local
+.env.*.local

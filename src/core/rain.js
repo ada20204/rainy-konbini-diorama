@@ -5,13 +5,10 @@
 import * as THREE from 'three';
 import { rng } from './toon.js';
 
-export function createRain(scene, {
-  count = 1700,
-  area = 13.5,
-  top = 13,
-  exclude = [],
-  color = 0x93b7ee,
-} = {}) {
+export function createRain(
+  scene,
+  { count = 1700, area = 13.5, top = 13, exclude = [], color = 0x93b7ee } = {}
+) {
   const rand = rng(20261112);
   const positions = new Float32Array(count * 6);
   const drops = [];
@@ -75,7 +72,12 @@ export function createRain(scene, {
     geo.attributes.position.needsUpdate = true;
   }
 
-  return { update, fadeIn: () => { fade = 0; } };
+  return {
+    update,
+    fadeIn: () => {
+      fade = 0;
+    },
+  };
 }
 
 /** 地面溅落的小涟漪（对象池） */
@@ -85,8 +87,7 @@ export function createSplashes(scene, { count = 42, area = 12.5, exclude = [] } 
   geo.rotateX(-Math.PI / 2);
   const items = [];
 
-  const insideExclude = (x, z) =>
-    exclude.some((r) => x > r.x0 && x < r.x1 && z > r.z0 && z < r.z1);
+  const insideExclude = (x, z) => exclude.some((r) => x > r.x0 && x < r.x1 && z > r.z0 && z < r.z1);
 
   for (let i = 0; i < count; i++) {
     const mat = new THREE.MeshBasicMaterial({
@@ -98,7 +99,13 @@ export function createSplashes(scene, { count = 42, area = 12.5, exclude = [] } 
     const mesh = new THREE.Mesh(geo, mat);
     mesh.renderOrder = 4;
     scene.add(mesh);
-    items.push({ mesh, mat, life: rand() * 1.4, dur: 0.75 + rand() * 0.7, grow: 1.6 + rand() * 1.4 });
+    items.push({
+      mesh,
+      mat,
+      life: rand() * 1.4,
+      dur: 0.75 + rand() * 0.7,
+      grow: 1.6 + rand() * 1.4,
+    });
   }
 
   function respawn(it) {

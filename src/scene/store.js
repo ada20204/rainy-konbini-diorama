@@ -154,7 +154,9 @@ export function buildStore(scene, reg) {
    * ============================================================ */
   const awning = new THREE.Group();
   const awn = box(5.65, 0.07, 1.15, toonMat(0xffffff, { map: awningTexture() }), {
-    x: -4.85, y: W + 2.28, z: -0.68,
+    x: -4.85,
+    y: W + 2.28,
+    z: -0.68,
   });
   awn.rotation.x = 0.31;
   awning.add(awn);
@@ -204,7 +206,10 @@ export function buildStore(scene, reg) {
   exterior.add(box(1.2, 0.012, 0.2, flatMat(0x2f855a), { x: -3.075, y: W + 0.039, z: -0.72 }));
   // 外墙海报
   for (let i = 0; i < 2; i++) {
-    const p = new THREE.Mesh(new THREE.PlaneGeometry(0.42, 0.6), flatMat(0xffffff, { map: posterTexture(i + 3) }));
+    const p = new THREE.Mesh(
+      new THREE.PlaneGeometry(0.42, 0.6),
+      flatMat(0xffffff, { map: posterTexture(i + 3) })
+    );
     p.position.set(-7.68, W + 1.35 + i * 0.02, -1.18 - i * 0.68);
     exterior.add(p);
   }
@@ -215,9 +220,13 @@ export function buildStore(scene, reg) {
    *  7. 店内：地面 / 天花 / 灯具
    * ============================================================ */
   const interior = new THREE.Group();
-  interior.add(box(5.96, 0.04, 6.56, toonMat(0xffffff, { map: interiorFloorTexture() }), {
-    x: -4.8, y: W + 0.03, z: -4.7,
-  }));
+  interior.add(
+    box(5.96, 0.04, 6.56, toonMat(0xffffff, { map: interiorFloorTexture() }), {
+      x: -4.8,
+      y: W + 0.03,
+      z: -4.7,
+    })
+  );
   interior.add(box(5.96, 0.06, 6.56, toonMat(0xf2ede2), { x: -4.8, y: W + 2.75, z: -4.7 }));
   for (const x of [-6.55, -4.8, -3.05]) {
     for (const z of [-6.3, -3.1]) {
@@ -244,8 +253,8 @@ export function buildStore(scene, reg) {
    *  8. 货架（双排端头架 + 商品）
    * ============================================================ */
   const productColors = [
-    0xf87171, 0xfbbf24, 0x34d399, 0x60a5fa, 0xa78bfa, 0xf472b6,
-    0xfb923c, 0x22d3ee, 0xfacc15, 0x4ade80, 0x818cf8, 0xe879f9,
+    0xf87171, 0xfbbf24, 0x34d399, 0x60a5fa, 0xa78bfa, 0xf472b6, 0xfb923c, 0x22d3ee, 0xfacc15,
+    0x4ade80, 0x818cf8, 0xe879f9,
   ];
 
   function makeGondola(gx, seed) {
@@ -270,7 +279,7 @@ export function buildStore(scene, reg) {
     const inst = new THREE.InstancedMesh(
       new THREE.BoxGeometry(0.17, 0.23, 0.17),
       toonMat(0xffffff),
-      count,
+      count
     );
     inst.castShadow = true;
     const dummy = new THREE.Object3D();
@@ -285,7 +294,10 @@ export function buildStore(scene, reg) {
           dummy.rotation.y = (r() - 0.5) * 0.35;
           dummy.updateMatrix();
           inst.setMatrixAt(idx, dummy.matrix);
-          inst.setColorAt(idx, new THREE.Color(productColors[Math.floor(r() * productColors.length)]));
+          inst.setColorAt(
+            idx,
+            new THREE.Color(productColors[Math.floor(r() * productColors.length)])
+          );
           idx++;
         }
       }
@@ -306,7 +318,9 @@ export function buildStore(scene, reg) {
    *  9. 后墙冷柜（玻璃冷柜 + 饮料）
    * ============================================================ */
   const fridgeWall = new THREE.Group();
-  const bottleColors = [0x60a5fa, 0xf472b6, 0xfbbf24, 0x34d399, 0xa78bfa, 0xfb923c, 0x22d3ee, 0xf87171];
+  const bottleColors = [
+    0x60a5fa, 0xf472b6, 0xfbbf24, 0x34d399, 0xa78bfa, 0xfb923c, 0x22d3ee, 0xf87171,
+  ];
   const bottleGeo = new THREE.CylinderGeometry(0.055, 0.055, 0.24, 10);
   const bottles = new THREE.InstancedMesh(bottleGeo, toonMat(0xffffff), 3 * 3 * 9);
   bottles.castShadow = true;
@@ -316,7 +330,10 @@ export function buildStore(scene, reg) {
     const cx = -6.85 + u * 1.9;
     fridgeWall.add(box(1.85, 2.35, 0.62, toonMat(0xd7dee9), { x: cx, y: W + 1.175, z: -7.64 }));
     // 冷柜内部发光 + 玻璃门
-    const glow = new THREE.Mesh(new THREE.PlaneGeometry(1.6, 2.02), flatMat(0xdceeff, { map: fridgeTexture() }));
+    const glow = new THREE.Mesh(
+      new THREE.PlaneGeometry(1.6, 2.02),
+      flatMat(0xdceeff, { map: fridgeTexture() })
+    );
     glow.position.set(cx, W + 1.17, -7.315);
     fridgeWall.add(glow);
     const g2 = new THREE.Mesh(new THREE.PlaneGeometry(1.66, 2.08), glassMat.clone());
@@ -326,8 +343,12 @@ export function buildStore(scene, reg) {
     // 门框
     fridgeWall.add(box(1.72, 0.09, 0.08, toonMat(0x8b93a8), { x: cx, y: W + 2.22, z: -7.27 }));
     fridgeWall.add(box(1.72, 0.09, 0.08, toonMat(0x8b93a8), { x: cx, y: W + 0.12, z: -7.27 }));
-    fridgeWall.add(box(0.09, 2.18, 0.08, toonMat(0x8b93a8), { x: cx - 0.855, y: W + 1.17, z: -7.27 }));
-    fridgeWall.add(box(0.09, 2.18, 0.08, toonMat(0x8b93a8), { x: cx + 0.855, y: W + 1.17, z: -7.27 }));
+    fridgeWall.add(
+      box(0.09, 2.18, 0.08, toonMat(0x8b93a8), { x: cx - 0.855, y: W + 1.17, z: -7.27 })
+    );
+    fridgeWall.add(
+      box(0.09, 2.18, 0.08, toonMat(0x8b93a8), { x: cx + 0.855, y: W + 1.17, z: -7.27 })
+    );
     // 瓶子
     for (let s = 0; s < 3; s++) {
       for (let i = 0; i < 9; i++) {
@@ -373,7 +394,10 @@ export function buildStore(scene, reg) {
   counter.add(hotGlow);
   // 悬挂菜单
   for (const z of [-3.6, -5.1]) {
-    const menu = new THREE.Mesh(new THREE.PlaneGeometry(1.15, 0.52), flatMat(0xffffff, { map: menuTexture() }));
+    const menu = new THREE.Mesh(
+      new THREE.PlaneGeometry(1.15, 0.52),
+      flatMat(0xffffff, { map: menuTexture() })
+    );
     menu.position.set(-2.72, W + 2.32, z);
     menu.rotation.y = -Math.PI / 2;
     counter.add(menu);
@@ -394,7 +418,7 @@ export function buildStore(scene, reg) {
     for (let m = 0; m < 4; m++) {
       const cover = new THREE.Mesh(
         new THREE.PlaneGeometry(0.3, 0.4),
-        flatMat(0xffffff, { map: posterTexture((b * 4 + m) % 5) }),
+        flatMat(0xffffff, { map: posterTexture((b * 4 + m) % 5) })
       );
       cover.rotation.x = -Math.PI / 2 - 0.55;
       cover.position.set(-7.42 + m * 0.35, y + 0.12, -1.93 + b * 0.02);
@@ -410,25 +434,38 @@ export function buildStore(scene, reg) {
    * ============================================================ */
   const decor = new THREE.Group();
   for (let i = 0; i < 2; i++) {
-    const p = new THREE.Mesh(new THREE.PlaneGeometry(0.72, 1.0), flatMat(0xffffff, { map: posterTexture(i) }));
+    const p = new THREE.Mesh(
+      new THREE.PlaneGeometry(0.72, 1.0),
+      flatMat(0xffffff, { map: posterTexture(i) })
+    );
     p.position.set(-2.4 - i * 1.5, W + 1.62, -7.955);
     decor.add(p);
   }
-  const sidePoster = new THREE.Mesh(new THREE.PlaneGeometry(0.72, 1.0), flatMat(0xffffff, { map: posterTexture(4) }));
+  const sidePoster = new THREE.Mesh(
+    new THREE.PlaneGeometry(0.72, 1.0),
+    flatMat(0xffffff, { map: posterTexture(4) })
+  );
   sidePoster.position.set(-7.955, W + 1.62, -3.6);
   sidePoster.rotation.y = Math.PI / 2;
   decor.add(sidePoster);
   // 购物篮
   for (let i = 0; i < 3; i++) {
-    decor.add(box(0.52, 0.13, 0.38, toonMat(0xc2410c), {
-      x: -4.35 + i * 0.02, y: W + 0.12 + i * 0.12, z: -1.72 - i * 0.015,
-    }));
+    decor.add(
+      box(0.52, 0.13, 0.38, toonMat(0xc2410c), {
+        x: -4.35 + i * 0.02,
+        y: W + 0.12 + i * 0.12,
+        z: -1.72 - i * 0.015,
+      })
+    );
   }
   // 门内垫
   decor.add(box(1.3, 0.025, 0.75, toonMat(0x5b6472), { x: -3.075, y: W + 0.055, z: -1.85 }));
   // 吊挂提示牌
   for (const x of [-5.6, -4.0]) {
-    const tag = new THREE.Mesh(new THREE.PlaneGeometry(0.62, 0.3), flatMat(0xffffff, { map: menuTexture() }));
+    const tag = new THREE.Mesh(
+      new THREE.PlaneGeometry(0.62, 0.3),
+      flatMat(0xffffff, { map: menuTexture() })
+    );
     tag.position.set(x, W + 2.42, -2.6);
     tag.rotation.y = 0.12;
     decor.add(tag);
